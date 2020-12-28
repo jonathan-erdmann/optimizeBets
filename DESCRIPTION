@@ -6,7 +6,7 @@ Authors@R:
            family = "Erdmann",
            role = c("creator"),
            email = "jonathan.erdmann@protonmail.com",
-           comment = c("")
+           comment = c("None")
 Description: 
     Determine optimal bet placements for a set of probabilities and payouts
 License: use_mit_license()
