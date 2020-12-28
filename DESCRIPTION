@@ -1,0 +1,18 @@
+Package: optimizebets
+Title: Optimize Bet Placement
+Version: 0.0.1
+Authors@R: 
+    person(given = "Jonathan",
+           family = "Erdmann",
+           role = c("creator"),
+           email = "jonathan.erdmann@protonmail.com",
+           comment = c("")
+Description: 
+    Determine optimal bet placements for a set of probabilities and payouts
+License: use_mit_license()
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports:
+    matrixStats
