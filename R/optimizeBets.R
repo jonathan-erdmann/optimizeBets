@@ -1,3 +1,5 @@
+#' @export
+
 optimizeBets <- function (iProbabilities, iPayouts) {
 
     #Eliminate non-viable bets

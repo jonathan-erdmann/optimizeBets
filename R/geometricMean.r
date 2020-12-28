@@ -1,3 +1,5 @@
+#' @export
+
 #library(matrixStats)
 
 binaryOutcomes <- function(n) {
