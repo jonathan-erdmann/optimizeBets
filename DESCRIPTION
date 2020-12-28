@@ -1,12 +1,7 @@
 Package: optimizebets
 Title: Optimize Bet Placement
 Version: 0.0.1
-Authors@R: 
-    person(given = "Jonathan",
-           family = "Erdmann",
-           role = c("creator"),
-           email = "jonathan.erdmann@protonmail.com",
-           comment = c("None"))
+Author: Jonathan Erdmann
 Description: 
     Determine optimal bet placements for a set of probabilities and payouts
 License: use_mit_license()
