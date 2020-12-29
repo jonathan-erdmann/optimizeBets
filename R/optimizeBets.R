@@ -6,8 +6,8 @@ optimizeBets <- function (iProbabilities, iPayouts) {
     viableProb <- iProbabilities[viableBets]
     viablePays <- iPayouts[viableBets]
 
-    nBets     <- length(viableProb)
-    initBets  <- runif(nBets, min = 1, max = 10) / 1000
+    nBets <- length(viableProb)
+    initBets <- runif(nBets, min = 1, max = 10) / 1000
     optimFunc <- function(x) -geometricMean(x, viableProb, viablePays)
 
     res <- optim(
@@ -18,16 +18,17 @@ optimizeBets <- function (iProbabilities, iPayouts) {
             ,method = "L-BFGS-B"
         )
 
-    res$viableBets        <- viableBets
-    res$individualKelly   <- kellyBet(iProbabilities, iPayouts)
-    res$individualExp     <- iProbabilities * (iPayouts + 1)
-    res$probability       <- iProbabilities
-    res$payouts           <- iPayouts
+    res$par <- ifelse(viableBets, res$par, 0)
+    res$totalBet <- sum(res$par)
+    res$viableBets <- viableBets
+    res$individualKelly <- kellyBet(iProbabilities, iPayouts)
+    res$individualExp <- iProbabilities * (iPayouts + 1)
+    res$probability <- iProbabilities
+    res$payouts <- iPayouts
     res$viableProbability <- viableProb
-    res$viablePays        <- viablePays
-    res$value             <- -res$value
+    res$viablePays <- viablePays
+    res$value <- -res$value
 
     return(res)
 
 }
-
