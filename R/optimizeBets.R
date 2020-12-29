@@ -1,5 +1,4 @@
 #' @export
-
 optimizeBets <- function (iProbabilities, iPayouts) {
 
     #Eliminate non-viable bets
@@ -32,11 +31,3 @@ optimizeBets <- function (iProbabilities, iPayouts) {
 
 }
 
-kellyBet <-  function (iProbabilities, iPayouts) {
-
-    q <- 1 - iProbabilities
-    f <- (iPayouts * iProbabilities - q) / iPayouts
-
-    return(f)
-
-}
