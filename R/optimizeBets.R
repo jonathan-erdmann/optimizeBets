@@ -18,8 +18,11 @@ optimizeBets <- function (iProbabilities, iPayouts) {
             ,method = "L-BFGS-B"
         )
 
-    res$par <- ifelse(viableBets, res$par, 0)
-    res$totalBet <- sum(res$par)
+    #res$par <- ifelse(viableBets, res$par, 0)
+    res$bets <- rep(0, length(iProbabilities))
+    res$bets[viableBets] <- res$par
+
+    res$totalBet <- sum(res$bets)
     res$viableBets <- viableBets
     res$individualKelly <- kellyBet(iProbabilities, iPayouts)
     res$individualExp <- iProbabilities * (iPayouts + 1)
