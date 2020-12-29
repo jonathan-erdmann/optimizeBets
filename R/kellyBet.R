@@ -4,7 +4,15 @@ kellyBet <-  function (iProbabilities, iPayouts) {
     q <- 1 - iProbabilities
     f <- (iPayouts * iProbabilities - q) / iPayouts
 
-    return(f)
+    if (f > 0) {
+
+        return(f)
+
+    } else {
+
+        return(0)
+
+    }
 
 }
 
