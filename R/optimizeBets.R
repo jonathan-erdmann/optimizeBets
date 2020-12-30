@@ -18,9 +18,9 @@ optimizeBets <- function (iProbabilities, iPayouts) {
             ,method = "L-BFGS-B"
         )
 
-    res$par <- NULL
     res$bets <- rep(0, length(iProbabilities))
     res$bets[viableBets] <- res$par
+    res$par <- NULL
     res$totalBet <- sum(res$bets)
     res$viableBets <- viableBets
     res$individualKelly <- kellyBet(iProbabilities, iPayouts)
