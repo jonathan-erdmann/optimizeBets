@@ -2,8 +2,8 @@
 moneyLineToOdds <- function(iMoneyLine) {
 
     ml <- iMoneyLine[abs(iMoneyLine) >= 100]
-    po <- ifelse(ml > 0, ml / 100, -100 / ml)
+    odds <- ifelse(ml > 0, ml / 100, -100 / ml)
 
-    return(po)
+    return(odds)
 
 }
