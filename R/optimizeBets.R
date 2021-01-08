@@ -1,13 +1,21 @@
 #' @export
-optimizeBets <- function (iProbabilities, iPayouts) {
+optimizeBets <- function(iBetInput) {
+
+    #Input Data Frame w/ Columns
+    #   Bet Name : name
+    #   Money Line : moneyLine
+    #   Probability : probability
+
+    odds <- moneyLineToOdds(iBetInput$moneyLine)
+    probability <- iBetInput$probability
 
     #Eliminate non-viable bets
-    viableBets <- iProbabilities * (iPayouts + 1) - 1 > 0
-    viableProb <- iProbabilities[viableBets]
-    viablePays <- iPayouts[viableBets]
+    viableBets <- probability * (odds + 1) - 1 > 0
+    viableProb <- probability[viableBets]
+    viablePays <- odds[viableBets]
 
     nBets <- length(viableProb)
-    initBets <- runif(nBets, min = 1, max = 10) / 1000
+    initBets <- rep(1E-8, nBets)
     optimFunc <- function(x) -geometricMean(x, viableProb, viablePays)
 
     res <- optim(
@@ -18,19 +26,12 @@ optimizeBets <- function (iProbabilities, iPayouts) {
             ,method = "L-BFGS-B"
         )
 
-    res$bets <- rep(0, length(iProbabilities))
+    res$bets <- rep(0, length(probability))
     res$bets[viableBets] <- res$par
-    res$par <- NULL
-    res$totalBet <- sum(res$bets)
-    res$viableBets <- viableBets
-    res$individualKelly <- kellyBet(iProbabilities, iPayouts)
-    res$individualExp <- iProbabilities * (iPayouts + 1)
-    res$probability <- iProbabilities
-    res$payouts <- iPayouts
-    res$viableProbability <- viableProb
-    res$viablePays <- viablePays
-    res$value <- -res$value
 
-    return(res)
+    optimalBets <- data.frame(iBetInput$name, res$bets)
+    colnames(optimalBets) <- c("name","bet")
+
+    return(optimalBets)
 
 }

@@ -2,12 +2,12 @@
 readBetProbabilityOdds <- function(iFile) {
 
     #Expecting CSV without header
-    #   TEAM
+    #   BET NAME
     #   MONEY LINE
     #   PROBABILITY
 
     inFile <- read.csv(iFile, header = FALSE)
-    colnames(inFile) <- c("team","moneyLine","probability")
+    colnames(inFile) <- c("name","moneyLine","probability")
     return(inFile)
 
 }
