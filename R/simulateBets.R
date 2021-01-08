@@ -7,16 +7,16 @@ simulateBets <- function(iProbability, iPayouts, iBets, iSimulations) {
 
         outcomes <- runif(length(iProbability))
         wins <- outcomes <= iProbability
-        loss <- outcomes >  iProbability
 
-        prof[ii] <- sum((1 + iPayouts[wins]) * iBets[wins]) - sum(iBets[loss])
+        prof[ii] <- profitLoss(1, wins, iPayouts, iBets) - 1
 
     }
 
     sb <- NULL
-    sb$probability <- 1:iSimulations / iSimulations
-    sb$profit <- sort(prof)
-    sb$winProbability <- mean(prof > 0)
+    probability <- 1:iSimulations / iSimulations
+    profit <- sort(prof)
+
+    sb <- data.frame(probability, profit)
 
     return(sb)
 
