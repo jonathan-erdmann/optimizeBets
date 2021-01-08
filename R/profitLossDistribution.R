@@ -25,7 +25,7 @@ profitLossDistribution <- function(iBetInput, iBet) {
     }
 
     profitLossDist <- data.frame(likelihood, profit)
-    colnames(profitLossDist) <- c("probability","profit")
+    colnames(profitLossDist) <- c("probability","profit_loss")
     profitLossDist <- profitLossDist[order(profit),]
     profitLossDist <- within(profitLossDist, probability <- cumsum(probability))
 
