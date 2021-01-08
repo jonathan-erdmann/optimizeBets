@@ -1,22 +1,26 @@
 #' @export
-profitLossDistribution <- function(iProbability, iOdds, iBets) {
+profitLossDistribution <- function(iBetInput, iBet) {
 
-    # Input: probability, payout odds, and bets
+    # Input: Two data frames containing probability, odds, and bets
     # Output: profit/loss distribution
 
-    nGames <- length(iProbability)
+    probability <- iBetInput$probability
+    odds <- moneyLineToOdds(iBetInput$moneyLine)
+    bet <- iBet$bet
+
+    nGames <- length(probability)
     outcomes <- binaryOutcomes(nGames)
     nOutcomes <- nrow(outcomes)
 
-    likelihood <- columnwiseExponentiation(iProbability, outcomes)
-    likelihood <- likelihood * columnwiseExponentiation(1 - iProbability, 1 - outcomes)
+    likelihood <- columnwiseExponentiation(probability, outcomes)
+    likelihood <- likelihood * columnwiseExponentiation(1 - probability, 1 - outcomes)
     likelihood <- rowProds(likelihood)
 
     profit <- rep(0, nOutcomes)
 
     for (ii in 1:nOutcomes) {
 
-        profit[ii] <- profitLoss(1, outcomes[ii, ], iOdds, iBets)
+        profit[ii] <- profitLoss(1, outcomes[ii, ], odds, bet)
 
     }
 
