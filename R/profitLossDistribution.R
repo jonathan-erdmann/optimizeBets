@@ -1,12 +1,12 @@
 #' @export
-profitLossDistribution <- function(iBetInput, iBet) {
+profitLossDistribution <- function(iBetCard) {
 
-    # Input: Two data frames containing probability, odds, and bets
+    # Input: Data frames containing probability, odds, and bets
     # Output: profit/loss distribution
 
-    probability <- iBetInput$probability
-    odds <- moneyLineToOdds(iBetInput$moneyLine)
-    bet <- iBet$bet
+    probability <- iBetCard$probability
+    odds <- moneyLineToOdds(iBetCard$moneyLine)
+    bet <- iBetCard$bet
 
     nGames <- length(probability)
     outcomes <- binaryOutcomes(nGames)
