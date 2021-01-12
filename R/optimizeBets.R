@@ -10,7 +10,7 @@ optimizeBets <- function(iBetInput) {
     probability <- iBetInput$probability
 
     #Eliminate non-viable bets
-    viableBets <- probability * (odds + 1) - 1 > 0
+    viableBets <- kellyBet(probability,odds) > 0
     viableProb <- probability[viableBets]
     viablePays <- odds[viableBets]
 
