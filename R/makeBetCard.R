@@ -12,7 +12,7 @@ makeBetCard <- function(iFile) {
     betOutViable <- betOut[betOut$bet > 0, ]
 
     betCard <- betInViable %>% left_join(betOutViable, by = "name")
-    betCard <- betCard[order(-bet), ]
+    betCard <- betCard[order(-betCard$bet), ]
 
     return(betCard)
 
