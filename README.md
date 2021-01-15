@@ -1,4 +1,4 @@
 # optimizeBets
 Optimal bet sizing as a function of payouts and probabilities
 
-Editing in RStudio - Second Attempt
+Made by Jonathan Erdmann (https://github.com/jonathan-erdmann)
