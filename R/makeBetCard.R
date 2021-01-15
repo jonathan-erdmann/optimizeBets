@@ -1,12 +1,12 @@
 #' @export
-makeBetCard <- function(iFile) {
+makeBetCard <- function(iFile, iExact = FALSE) {
 
     betIn <- readBetProbabilityOdds(iFile)
     betIn <- betIn[betIn$kellyBet > 0, ]
     nViable <- nrow(betIn)
 
     betIn <- betIn[order(-betIn$kellyBet), ]
-    betOut <- optimizeBets(betIn)
+    betOut <- optimizeBets(betIn, iExact)
 
     betInViable <- betIn[betOut$bet > 0, ]
     betOutViable <- betOut[betOut$bet > 0, ]
