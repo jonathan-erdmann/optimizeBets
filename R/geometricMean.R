@@ -1,7 +1,7 @@
 #' @export
-geometricMean <- function(iBetCard, iExact = TRUE, iSimulations = 1E4) {
+geometricMean <- function(iBet, iBetCard, iExact = TRUE, iSimulations = 1E4) {
 
-    bets <- iBetCard$bets
+    bets <- iBet
     probability <- iBetCard$probability
     odds <- iBetCard$odds
 

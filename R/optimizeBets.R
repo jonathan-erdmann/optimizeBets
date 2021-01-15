@@ -1,5 +1,5 @@
 #' @export
-optimizeBets <- function(iBetCard) {
+optimizeBets <- function(iBetCard, iExact = FALSE) {
 
     #Input Data Frame w/ Columns
     #   Bet Name : name
@@ -16,7 +16,8 @@ optimizeBets <- function(iBetCard) {
 
     nBets <- length(viableProb)
     initBets <- rep(1E-8, nBets)
-    optimFunc <- function(x) -geometricMean(x, viableProb, viablePays)
+
+    optimFunc <- function(x) -geometricMean(x, iBetCard, iExact)
 
     res <- optim(
              initBets
