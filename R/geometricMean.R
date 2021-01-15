@@ -1,24 +1,66 @@
 #' @export
-geometricMean <- function(iBets, iProb, iPays) {
+geometricMean <- function(iBetCard, iExact = TRUE, iSimulations = 1E4) {
 
-    nGames <- length(iBets)
-    outcomes <- binaryOutcomes(nGames)
+    bets <- iBetCard$bets
+    probability <- iBetCard$probability
+    odds <- iBetCard$odds
 
-    likelihood <- columnwiseExponentiation(iProb, outcomes)
-    likelihood <- likelihood * columnwiseExponentiation(1 - iProb, 1 - outcomes)
-    likelihood <- rowProds(likelihood)
+    if (iExact) {
 
-    payouts <- (outcomes %*% (iPays * iBets)) - (1 - outcomes) %*% iBets
+        nGames <- length(bets)
+        outcomes <- binaryOutcomes(nGames)
 
-    if (min(payouts) > -1) {
+        likelihood <- columnwiseExponentiation(probability, outcomes)
+        likelihood <- likelihood * columnwiseExponentiation(1 - probability, 1 - outcomes)
+        likelihood <- rowProds(likelihood)
 
-        logPayouts <- log(1 + payouts)
-        gm <- sum(likelihood %*% logPayouts)
+        payouts <- (outcomes %*% (odds * bets)) - (1 - outcomes) %*% bets
+
+        if (min(payouts) > -1) {
+
+            logPayouts <- log(1 + payouts)
+            gm <- sum(likelihood %*% logPayouts)
+
+        } else {
+
+            #gm <- -Inf
+            gm <- -1E12
+
+        }
 
     } else {
 
-        #gm <- -Inf
-        gm <- -1E12
+        set.seed(2)
+        prof <- rep(0, iSimulations)
+
+        if (sum(bets) >= 1) {
+
+            gm <- -1E12
+
+        } else {
+
+            for (ii in 1:iSimulations) {
+
+                outcomes <- runif(length(probability))
+                wins <- outcomes <= probability
+
+                pl <- profitLoss(1, wins, odds, bets)
+
+                if (pl > 0) {
+
+                    prof[ii] <- log(pl)
+
+                } else {
+
+                    prof[ii] <- -1E12
+
+                }
+
+            }
+
+            gm <- mean(prof)
+
+        }
 
     }
 

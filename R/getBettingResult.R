@@ -5,9 +5,7 @@ getBettingResult <- function(iBetCard, iStartingCapital) {
     odds <- moneyLineToOdds(iBetCard$moneyLine)
     returned <- iBetCard$win_loss * (1 + odds) * wagered
 
-    #betCardResult <- data.frame(iBetCard,wagered,iBetCard$win_loss,returned)
     betCardResult <- data.frame(iBetCard,wagered,returned)
-    #colnames(betCardResult)[colnames(betCardResult) == "iBetCard.win_loss"] <- "win"
 
     totalWagered <- sum(wagered)
     totalReturned <- sum(returned)

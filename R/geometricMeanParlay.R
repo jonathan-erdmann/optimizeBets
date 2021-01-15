@@ -1,11 +1,12 @@
 #' @export
-geometricMeanParlay <- function(iBets, iProb, iPays) {
+geometricMeanParlay <- function(iBetCard) {
 
-    nGames <- length(iProb)
+    bets <- iBetCard$bets
+    probability <- iBetCard$probability
+    odds <- iBetCard$odds
+
+    nGames <- length(bets)
     outcomes <- binaryOutcomes(nGames)
-
-    probability <- iProb
-    odds <- iPays
 
     likelihood <- columnwiseExponentiation(probability, outcomes)
     likelihood <- likelihood * columnwiseExponentiation(1 - probability, 1 - outcomes)
@@ -14,7 +15,7 @@ geometricMeanParlay <- function(iBets, iProb, iPays) {
     outcomes <- twoWayOutcomes(outcomes)
     odds <- twoWayOdds(odds)
 
-    payouts <- (outcomes %*% (odds * iBets)) - (1 - outcomes) %*% iBets
+    payouts <- (outcomes %*% (odds * bets)) - (1 - outcomes) %*% bets
 
     if (min(payouts) > -1) {
 

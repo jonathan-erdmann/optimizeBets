@@ -1,13 +1,13 @@
 #' @export
-optimizeBets <- function(iBetInput) {
+optimizeBets <- function(iBetCard) {
 
     #Input Data Frame w/ Columns
     #   Bet Name : name
     #   Money Line : moneyLine
     #   Probability : probability
 
-    odds <- moneyLineToOdds(iBetInput$moneyLine)
-    probability <- iBetInput$probability
+    odds <- moneyLineToOdds(iBetCard$moneyLine)
+    probability <- iBetCard$probability
 
     #Eliminate non-viable bets
     viableBets <- kellyBet(probability,odds) > 0
@@ -29,7 +29,7 @@ optimizeBets <- function(iBetInput) {
     res$bets <- rep(0, length(probability))
     res$bets[viableBets] <- res$par
 
-    optimalBets <- data.frame(iBetInput$name, res$bets)
+    optimalBets <- data.frame(iBetCard$name, res$bets)
     colnames(optimalBets) <- c("name","bet")
 
     return(optimalBets)
