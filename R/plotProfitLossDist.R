@@ -7,16 +7,7 @@ plotProfitLossDist <- function(iBetCard, iPoints = 1000) {
 
     pnl <- simulateBets(probability, odds, bet, iPoints)
 
-    if (iPoints > 1000) {
-
-        g <- ggplot(pnl, aes(x = probability, y = profit)) + geom_line()
-
-    } else {
-
-        g <- ggplot(pnl, aes(x = probability, y = profit)) + geom_point()
-
-    }
-
+    g <- ggplot(pnl, aes(x = probability, y = profit)) + geom_point(shape = ".")
     g <- g + ylim(c(-1, 2))
     g <- g + ggtitle("") + xlab("Cumulative Probability") + ylab("Profit/Loss")
     g <- g + theme_minimal()
