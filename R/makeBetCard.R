@@ -8,7 +8,7 @@ makeBetCard <- function(iFile, iExact = FALSE, iFactorBet = 4, iMinBetSize = 0.0
 
     betCard <- betIn %>%
         left_join(betOut, by = "name") %>%
-        mutate(bet = bet / iFactorBet)
+        mutate(bet = bet / iFactorBet) %>%
         arrange(-bet) %>%
         filter(bet > iMinBetSize)
 
