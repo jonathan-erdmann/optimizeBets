@@ -12,4 +12,6 @@ RoxygenNote: 7.1.1
 Imports:
     tidyr,
     matrixStats,
-    dplyr
+    dplyr,
+    ggplot2,
+    ggthemes
