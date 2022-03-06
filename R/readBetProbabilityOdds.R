@@ -14,7 +14,7 @@ readBetProbabilityOdds <- function(iFile) {
     colnames(inFile) <- c("name","moneyLine","probability")
 
     inFile$odds <- moneyLineToOdds(inFile$moneyLine)
-    inFile$kellyBet <- kellyBet(inFile$probability, inFile$odds)
+    #inFile$kellyBet <- kellyBet(inFile$probability, inFile$odds)
 
     return(inFile)
 

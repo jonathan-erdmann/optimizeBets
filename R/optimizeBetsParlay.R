@@ -4,7 +4,7 @@ optimizeBetsParlay <- function (iBetCard) {
     probability <- iBetCard$probability
     odds <- iBetCard$odds
 
-    nBets <- length(iProbabilities)
+    nBets <- length(iProbability)
     nBets <- nBets + nBets * (nBets - 1) / 2
     initBets <- runif(nBets, min = 1, max = 10) / 1000
     optimFunc <- function(x) -geometricMeanParlay(x, probability, odds)

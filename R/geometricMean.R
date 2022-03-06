@@ -1,5 +1,5 @@
 #' @export
-geometricMean <- function(iBet, iBetCard, iExact = TRUE, iSimulations = 1E4) {
+geometricMean <- function(iBet, iBetCard, iExact = FALSE, iSimulations = 1E4, iRandomizeProb = TRUE, iProbSD = 0.01) {
 
     bets <- iBet
     probability <- iBetCard$probability
@@ -42,7 +42,13 @@ geometricMean <- function(iBet, iBetCard, iExact = TRUE, iSimulations = 1E4) {
             for (ii in 1:iSimulations) {
 
                 outcomes <- runif(length(probability))
-                wins <- outcomes <= probability
+
+                #-- JE EDIT 2022-03-04
+                #-- MAKE WIN PROBABILITY VARIABLE
+                ifelse(iRandomizeProb, probDelta <- rnorm(length(probability), mean=0, sd=iProbSD), probDelta <- rep(0,length(probability)))
+
+                probDelta <- probability + probDelta
+                wins <- outcomes <= probDelta
 
                 pl <- profitLoss(1, wins, odds, bets)
 
